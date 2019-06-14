@@ -16,24 +16,50 @@ auth_params = {
 token_link = '?'.join((AUTHORIZE_URL, urlencode(auth_params)))
 print(token_link)
 
-token = 'a071fd352e962a79f47f61a1d158978a4cdb99dfb0155d42628fb3bba795ffb066364b90460bfa2f937fa'
+token = '2eb0e9c5198797503fa6fb0c9f5d6e63423e738478b4c9c3e24c2f00964f04f57f8b3870acf6afd3cd0a9'
 
-def get_mutual():
-    inp1 = input('введите id пользователя:')
+# def get_mutual():
+#
+#     inp2 = input('введите id пользователя:')
+#
+#     params = {
+#         'v': VERSION,
+#         'source_uid': 6471121,
+#         'target_uid': inp2,
+#         'access_token': token
+#     }
+#
+#     response = requests.get('https://api.vk.com/method/friends.getMutual', params)
+#     response = response.json()['response']
+#
+#     for id in response:
+#         print('id общего друга:', id)
+#         print('ссылка на страницу: https://vk.com/id', id, sep='')
+#
+#
+# get_mutual()
 
-    params = {
-        'v': VERSION,
-        'source_uid': 1410393,
-        'target_uid': inp1,
-        'access_token': token
-    }
 
-    response = requests.get('https://api.vk.com/method/friends.getMutual', params)
-    response = response.json()['response']
+userID1 = 6471121
+userID2 = 6471123
 
-    for id in response:
-        print('id общего друга:', id)
-        print('ссылка на страницу: https://vk.com/id', id, sep='')
+user1 = User(userID1)
+user2 = User(userID2)
 
+class User:
+    def __and__(self, other_user):
+        params = {
+            'v': VERSION,
+            'source_uid': userID1,
+            'target_uid': userID2,
+            'access_token': token
+        }
 
-get_mutual()
+        response = requests.get('https://api.vk.com/method/friends.getMutual', params)
+        response = response.json()['response']
+
+        for id in response:
+            print('id общего друга:', id)
+            print('ссылка на страницу: https://vk.com/id', id, sep='')
+
+user1 & user2
