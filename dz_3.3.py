@@ -22,9 +22,10 @@ token = '73e64e811349b00ae127a08ac05454fb2b4d5384b2ce955285e19398a18caccd6b81854
 
 
 class User():
-    def __init__(self, id, token):
-        self.id = id
-        self.token = token
+    def __init__(self, userid):
+        self.userid = userid
+        #self.token = token
+
 
     def __and__(self, other_user):
         self.other_user = other_user
@@ -33,7 +34,7 @@ class User():
             'v': VERSION,
             'source_uid': self,
             'target_uid': other_user,
-            'access_token': token
+            'access_token': '73e64e811349b00ae127a08ac05454fb2b4d5384b2ce955285e19398a18caccd6b8185402f0ceb965bb95'
         }
 
         response = requests.get('https://api.vk.com/method/friends.getMutual', params)
@@ -41,8 +42,8 @@ class User():
         print(response)
 
 
-user1 = User(userID1, token)
-user2 = User(userID2, token)
+user1 = User(userID1)
+user2 = User(userID2)
 
 
 mutal_user_list = user1 & user2
