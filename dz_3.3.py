@@ -32,13 +32,13 @@ class User():
 
         params = {
             'v': VERSION,
-            'source_uid': self,
-            'target_uid': other_user,
-            'access_token': '73e64e811349b00ae127a08ac05454fb2b4d5384b2ce955285e19398a18caccd6b8185402f0ceb965bb95'
+            'source_uid': self.userid,
+            'target_uid': other_user.userid,
+            'access_token': '3c51a6557f1dd048fcc30496b6f77228bfa4995b8e775b0238f5b5a22f1d3b0e5dc4c617520ef05328c1e'
         }
 
         response = requests.get('https://api.vk.com/method/friends.getMutual', params)
-        response = response.json()#['response']
+        response = response.json()['response']
         print(response)
 
 
