@@ -5,7 +5,7 @@ APP_ID = 7029454
 AUTHORIZE_URL = 'https://oauth.vk.com/authorize'
 VERSION = '5.95'
 userID1 = 1410393
-userID2 = 6471123
+userID2 = 204816454
 
 auth_params = {
     'client_id': APP_ID,
@@ -24,7 +24,8 @@ token = '73e64e811349b00ae127a08ac05454fb2b4d5384b2ce955285e19398a18caccd6b81854
 class User():
     def __init__(self, userid):
         self.userid = userid
-        #self.token = token
+        self.response = []
+
 
 
     def __and__(self, other_user):
@@ -38,8 +39,13 @@ class User():
         }
 
         response = requests.get('https://api.vk.com/method/friends.getMutual', params)
-        response = response.json()['response']
-        print(response)
+        self.response = response.json()['response']
+        return self.response
+
+    def __str__(self):
+        for id in self.response:
+            print("id общего друга " + str(id))
+
 
 
 user1 = User(userID1)
@@ -47,5 +53,5 @@ user2 = User(userID2)
 
 
 mutal_user_list = user1 & user2
-print(mutal_user_list)
+print(user1)
 
